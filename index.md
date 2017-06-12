@@ -100,19 +100,19 @@ You can choose either of the two ways.<br/>
   A full sample of package.json:
   ```
   {
-  	"name": "Your-App",
-  	"version": "0.0.1",
-  	"description": "A sample nodejs app for Bluemix",
-  	"scripts": {
-  		"start": "node -r bluemix-autoscaling-agent --max-old-space-size=600 app.js"
-  	},
-  	"dependencies": {
-  		"bluemix-autoscaling-agent": "*"
-  	},
-  	"repository": {},
-  	"engines": {
-  		"node": "0.12.x"
-  	} 
+    "name": "Your-App",
+    "version": "0.0.1",
+    "description": "A sample nodejs app for Bluemix",
+    "scripts": {
+      "start": "node -r bluemix-autoscaling-agent --max-old-space-size=600 app.js"
+    },
+    "dependencies": {
+      "bluemix-autoscaling-agent": "*"
+    },
+    "repository": {},
+    "engines": {
+      "node": "0.12.x"
+    } 
   }
   ``` 
 
@@ -308,7 +308,7 @@ Note that this url can also be found through the `cf env APPNAME` command:
 
 With all the above prerequisites, you can now make REST API request by using the RestClient add-on in browser or just through some tool like `curl`. 
 
-With REST Client Add-on, like those for Firefox or Chrome, you can trigger REST request to {{site.data.keyword.autoscaling}} API server to execute your command. You just supply these add-on with the URL of the REST API, method and headers that are required by this REST API, and the parameters in the body part. For more details about each API, see [Rest API of IBM {{site.data.keyword.autoscaling}} for {{site.data.keyword.Bluemix_notm}}](https://new-console.stage1.ng.bluemix.net/apidocs/48){:new_window}.
+With REST Client Add-on, like those for Firefox or Chrome, you can trigger REST request to {{site.data.keyword.autoscaling}} API server to execute your command. You just supply these add-on with the URL of the REST API, method and headers that are required by this REST API, and the parameters in the body part. For more details about each API, see [Rest API of IBM {{site.data.keyword.autoscaling}} for {{site.data.keyword.Bluemix_notm}}](https://new-console.ng.bluemix.net/apidocs/48){:new_window}.
 
 With tools like `curl`, you can manage the {{site.data.keyword.autoscaling}} service within a script as following:    
 ```
@@ -342,21 +342,21 @@ The {{site.data.keyword.autoscaling}} CLI provides similar functionality as {{si
 
 | Field name  | Description |
 |-------------|----------------------|
-|*Allowable maixmum instance count* |	The maximum number of the application instance that can be started. If the current number of the application instances equals this value, the {{site.data.keyword.autoscaling}} service does not scale out the application any more. Default minimum instance count	The minimum number of the application instance that can be started. If the number of the instances equals this value, the {{site.data.keyword.autoscaling}} service dose not scale in the application any more. |
-| *Metric Type*	| 	The supported metric types that can be monitored. For more information, see Table 2. |
-| *Scale Out* | 	Specifies the threshold that triggers a scaling out action and how many instances are increased when the scaling out action is triggered. |
-| *Scale In* |	Specifies a threshold that triggers a scaling in action and how many instances are decreased when the scaling in action is triggered. |
-| *Statistic Window* |	The length of the past period when received metric values are recognized as valid. Metric values are valid only if the time stamps fall within this period. The unit of the Statistic Window parameter is second. |
-| *Breach Duration*	| The length of the past period when a scaling action might be triggered. A scaling action is triggered when collected metric values are either above the upper threshold, or below the lower threshold longer than the time specified. The unit of the Breach Duration parameter is second. |
+|*Allowable maixmum instance count* | The maximum number of the application instance that can be started. If the current number of the application instances equals this value, the {{site.data.keyword.autoscaling}} service does not scale out the application any more. Default minimum instance count The minimum number of the application instance that can be started. If the number of the instances equals this value, the {{site.data.keyword.autoscaling}} service dose not scale in the application any more. |
+| *Metric Type* |   The supported metric types that can be monitored. For more information, see Table 2. |
+| *Scale Out* |   Specifies the threshold that triggers a scaling out action and how many instances are increased when the scaling out action is triggered. |
+| *Scale In* |  Specifies a threshold that triggers a scaling in action and how many instances are decreased when the scaling in action is triggered. |
+| *Statistic Window* |  The length of the past period when received metric values are recognized as valid. Metric values are valid only if the time stamps fall within this period. The unit of the Statistic Window parameter is second. |
+| *Breach Duration* | The length of the past period when a scaling action might be triggered. A scaling action is triggered when collected metric values are either above the upper threshold, or below the lower threshold longer than the time specified. The unit of the Breach Duration parameter is second. |
 | *Cooldown period for scaling in* | After a scaling in action occurs, other scaling requests are ignored during the length of the period that is specified by the Cooldown period for scaling in parameter. The unit of this parameter is second. |
-| *Cooldown period for scaling out*	| After a scaling out action occurs, other scaling requests are ignored during the length of the period that is specified by the Cooldown period for scaling out parameter. The unit of this parameter is second. |
-| *Time Zone*	| The time zone where the schedule applies. |
-| *Start Time*  |	The start time of a recurring schedule. |
-| *End Time*    |	The end time of a recurring schedule.	|
-| *Repeat On*	|	The day in a week when a recurring schedule applies. |
-| *Minimum Instance Count* |	The minimum number of instances that can be started for the application during the specified time period in the schedule. |
-| *Start Date&Time* |	The start date and time of the schedule set up on a specific date. |
-| *End Date&Time* |	The end date and time of the schedule set up on a specific date.	|
+| *Cooldown period for scaling out* | After a scaling out action occurs, other scaling requests are ignored during the length of the period that is specified by the Cooldown period for scaling out parameter. The unit of this parameter is second. |
+| *Time Zone* | The time zone where the schedule applies. |
+| *Start Time*  | The start time of a recurring schedule. |
+| *End Time*    | The end time of a recurring schedule. |
+| *Repeat On* | The day in a week when a recurring schedule applies. |
+| *Minimum Instance Count* |  The minimum number of instances that can be started for the application during the specified time period in the schedule. |
+| *Start Date&Time* | The start date and time of the schedule set up on a specific date. |
+| *End Date&Time* | The end date and time of the schedule set up on a specific date.  |
 {: caption="Table 1. Policy fields in the scaling policy" caption-side="top"}
 
 | Metric name | Description | Supported application type |
