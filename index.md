@@ -14,7 +14,7 @@ lastupdated: "2017-08-09"
 {:shortdesc: .shortdesc}
 {:new_window: target="_blank"}
 
-# Getting started with the {{site.data.keyword.autoscaling}} service
+# Getting started with {{site.data.keyword.autoscaling}} service
 {: #autoscaling}
 
 
@@ -26,9 +26,11 @@ In {{site.data.keyword.Bluemix_notm}}, you can automatically manage your applica
   * [Configuring Node.js apps with the {{site.data.keyword.autoscaling}} service](#node-asagent)
   * [Configuring Swift apps with the {{site.data.keyword.autoscaling}} service](#swift-asagent)
   * [Manage {{site.data.keyword.autoscaling}} service through RESTful API](#RESTAPI)
-  * [Manage {{site.data.keyword.autoscaling}} service through {{site.data.keyword.autoscaling}} CLI](#CLI)
-  * [Policy fields for the {{site.data.keyword.autoscaling}} service](#policy_fields)
-  * [Supported metric type for the {{site.data.keyword.autoscaling}} service](#metric_types)
+  * [Manage {{site.data.keyword.autoscaling}} service through CLI](#CLI)
+  * [{{site.data.keyword.autoscaling}} service policy definition](#policy_fields)
+  * [Metric type supported for different runtimes](#metric_types)
+  * [How metric values are calculated](#metric_calculation)
+  * [Limitations](#limitations)
   * [Error messages](#err_msg)
 
 ## Using the {{site.data.keyword.autoscaling}} service in {{site.data.keyword.Bluemix_notm}}
@@ -85,15 +87,15 @@ To enable the {{site.data.keyword.autoscaling}} service with your Node.js apps, 
 2. Start *blumix-autoscaling-agent* with your application.
 There are two ways to start the agent. Either works. 
   + The first way is to update the package.json file by adding `"start": "node -r bluemix-autoscaling-agent  app.js"` to *script* section. For example:<br/>
-  ```
+```
   "scripts": {
     "start": "node -r bluemix-autoscaling-agent app.js"
-  }
-  ```
+  } 
+```
   + The second way is to update your main file to add the agent declaration `var as_agent = require('bluemix-autoscaling-agent');` <br/>
   *Note:* `bluemix-autoscaling-agent` must be initialized prior to the npm modules you want to monitor, so you must call `require('bluemix-autoscaling-agent');` **prior to** the other `require` statements. <br/>
   The following code snippet shows a complete entry js file with the auto-scaling agent declaration.<br/> 
-  ```
+```
   var agent = require('bluemix-autoscaling-agent');
   var http = require('http');
   var server = http.createServer(function handler(req, res) {
@@ -101,7 +103,7 @@ There are two ways to start the agent. Either works.
     
     }).listen(process.env.PORT || 3000);
   console.log('App is listening on port 3000');
-  ```
+```
 
 3. (Optional) Set heap limit if you want to trigger scaling based on heap usage. Update package.json to define `max-old-space-size` based on the memory that you allocate for your app. <br/> For example: 
   `
@@ -112,7 +114,7 @@ There are two ways to start the agent. Either works.
 <br/> If the value is not set when you start your application, the default Node.js heap limit 1.4GB is used as the maximum heap size regardless how much memory your app is allocated, which might lead to improper auto-scaling decisions.<br/>
 
 A full sample of package.json:
-  ```
+```
   {
     "name": "Your-App",
     "version": "0.0.1",
@@ -128,7 +130,7 @@ A full sample of package.json:
       "node": "0.12.x"
     } 
   }
-  ``` 
+``` 
 
 ## Configuring Swift apps with the {{site.data.keyword.autoscaling}} service
 {: #swift-asagent}
@@ -136,9 +138,9 @@ A full sample of package.json:
 To enable the {{site.data.keyword.autoscaling}} service with your Swift apps, besides service provision and binding steps, you need to complete the following steps as well before pushing the app to {{site.data.keyword.Bluemix_notm}}.
 
 1. Update Package.swift file to add dependency declaration of package SwiftMetrics: 
-   ```
+```
    Package(url: "https://github.com/RuntimeTools/SwiftMetrics.git" , majorVersion: 1)
-   ```
+```
    A sample Package.swift file is as below: 
 ```
 import PackageDescription
@@ -160,19 +162,19 @@ import SwiftMetricsBluemix
 ```
  + Initialize and start the agent: 
     +  Declare variables of the SwiftMetrics and SwiftMonitor in your app.
-      ```   
+```   
       let sm: SwiftMetrics
       let monitor: SwiftMonitor
-      ```
+```
     +  Create instances of the SwiftMetrics and SwiftMonitor classes in your app.
-      ```   
+```   
       sm = try SwiftMetrics()
       _ = SwiftMetricsKitura(swiftMetricsInstance: sm)
       _ = SwiftMetricsBluemix(swiftMetricsInstance: sm)
       monitor = sm.monitor()
-      ```
+```
     +  A sample of a Swift app that uses SwiftMetrics and Kitura is shown below:
-      ```
+```
       import Configuration
       import CloudFoundryConfig
       import Kitura
@@ -224,7 +226,7 @@ import SwiftMetricsBluemix
           }
 
       }
-      ```
+```
 
 *Note:* Currently only Swift application using Kitura framework is supported to use {{site.data.keyword.autoscaling}} service.
 
@@ -237,10 +239,9 @@ Before using the {{site.data.keyword.autoscaling}} RESTful API to manage the {{s
 * Bind the {{site.data.keyword.autoscaling}} service with your application as described in previous section.
 * Acquire the `AccessToken`
 <br/>The user must provide a valid `AccessToken` obtained through CloudFoundry UAA procedure when invoke {{site.data.keyword.autoscaling}} service RESTful API. After a successful login with command line, the `AccessToken` can be obtained by either approach:
-  <ul>
-    <li> Command `cf oauth-token`</li>
-  <li>Grab the `AccessToken` field from file `~/.cf/config.json` </li>
-    </ul>
+    * Command `cf oauth-token`
+    * Grab the `AccessToken` field from file `~/.cf/config.json` 
+    
    *Note:*  The `AccessToken` may expired after a period. If you get a 401 Unauthorized response for REST API request again, you need to repeat above steps to refresh `AccessToken`. 
   
 * Get endpoint of {{site.data.keyword.autoscaling}} API server <br/>
@@ -292,13 +293,13 @@ createPolicyUrl="${API_url}/v1/autoscaler/apps/${appId}/policy"
 curl $createPolicyUrl -X 'PUT' -H 'Content-Type:application/json' -H 'Accept:application/json'  -H "Authorization:$accessToken" --data-binary @${policyJson} 
 ```
 
-## Manage {{site.data.keyword.autoscaling}} service through {{site.data.keyword.autoscaling}} CLI 
+## Manage {{site.data.keyword.autoscaling}} service through CLI 
 {: #CLI}
 
-The {{site.data.keyword.autoscaling}} CLI provides similar functionality as {{site.data.keyword.autoscaling}} RESTful API but in a more friendly way to configure {{site.data.keyword.autoscaling}} service. <br/>
-For more details about how to install and use {{site.data.keyword.autoscaling}} CLI, see [{{site.data.keyword.autoscaling}} CLI](../../cli/plugins/auto-scaling/index.html){:new_window}
+The {{site.data.keyword.autoscaling}} CLI provides similar functionality as {{site.data.keyword.autoscaling}} RESTful API but in a more friendly way. <br/> For more details about how to install and use {{site.data.keyword.autoscaling}} CLI, see [{{site.data.keyword.autoscaling}} CLI](../../cli/plugins/auto-scaling/index.html){:new_window}
 
-## Policy fields for the {{site.data.keyword.autoscaling}} service
+
+## {{site.data.keyword.autoscaling}} policy definition
 {: #policy_fields}
 
 | Field name  | Description |
@@ -321,29 +322,10 @@ For more details about how to install and use {{site.data.keyword.autoscaling}} 
 
 {: caption="Table 1. Policy fields in the scaling policy" caption-side="top"}
 
-## Supported metric type for the {{site.data.keyword.autoscaling}} service
+
+### Metric type supported for different runtimes
 {: #metric_types}
-<br/>{{site.data.keyword.autoscaling}} service collects the runtime metrics for a Cloud Foundry application from the following data sources: 
-* "Memory" metric collected from Cloud Foundry:  <br>
-Cloud Foudry computes the memory usage from the "memory.stat" of cgroup with the formula below: <br>
-`memory_usge = total_rss + total_cache - total_inactive_file`
-   * total_cache:  memory used for page chache
-   * total_rss:    memory resident in main memory (RAM)
-   * total_inactive_file:  file-backed memory on inactive LRU list
 
-* Metrics collected by Auto-Scaling data collector: <br/>
-  * "Memory" metric:   
-  {{site.data.keyword.autoscaling}} data collector grabs container memory usage with the [rss](https://en.wikipedia.org/wiki/Resident_set_size) value in file */proc/{pid}/stat*: <br/> 
-  `memory_usage = RSS (total memory actually held in RAM for a process)`
-  * "Heap" metric:
-    * Lierty Java Runtime: Heap size that is used for current JVM.
-    * Node.js : Heap size that is used for current V8 runtime.
-  * "Response time" metric :  
-  Aggregated the total elapsed time of all processed requests occurred in a specific window (aka *report interval*) , and take the average value as `response time`. 
-  * "Throughput" metric:  
-  The number of the processed requests per second.
-
-### Metric types mapping for different runtimes:
 | Metric name | Data Source | Supported Runtime type |
 |-------------|----------------------| ------------------- |
 | *Heap* |   Auto-Scaling data collector    | Liberty for Java , Node.js SDK |
@@ -354,10 +336,35 @@ Cloud Foudry computes the memory usage from the "memory.stat" of cgroup with the
 
 {: caption="Table 2. Supported metric types" caption-side="top"}
 
-*Note::* 
-* To collect Response time/Throughput metrics data on Liberty for Java, your application must be deployed as Liberty web application so that measuring HTTP/HTTPS requests will be processed via Liberty web container.<br>
-For example, if you run a Spring Boot application as a "Main-Classs" app, the Liberty buildpack only provides java environment for you, and the app actually runs in the Spring embedded Tomcat container, thus no metrics data will be collected by the Auto-Scaling service. You must run your app as a Liberty WAR in order to work with Auto-Scaling service.<br/> 
-* For Swift application, only Kitura framework is supported for {{site.data.keyword.autoscaling}}.<br/> 
+## How metric values are calculated
+{: #metric_calculation}
+
+<br/>{{site.data.keyword.autoscaling}} service calculates the metric values in the following ways: 
+* "Memory" metric collected from Cloud Foundry: the value is the memory usage as percentage of memory limit of the application instance <br>
+Cloud Foudry computes the memory usage from the "memory.stat" of cgroup with the formula below: <br>
+`memory_usage = total_rss + total_cache - total_inactive_file`
+   * total_cache:  memory used for page chache
+   * total_rss:    memory resident in main memory (RAM)
+   * total_inactive_file:  file-backed memory on inactive LRU list
+
+* Metrics collected by Auto-Scaling data collector: <br/>
+  * "Memory" metric: the value is the memory usage as percentage of  memory limit of the application instance 
+  {{site.data.keyword.autoscaling}} data collector grabs  memory usage with the [rss](https://en.wikipedia.org/wiki/Resident_set_size) value in file */proc/{pid}/stat*: <br/> 
+  `memory_usage = RSS (total memory actually held in RAM for a process)`
+  * "Heap" metric: the value is the heap usage as percentage of the maximum heap size
+  * "Response time" metric:  
+     The value is the total elapsed time (in milliseconds) of all processed requests occurred in a time window (aka *report interval*) devided by the duration of the time window. 
+  * "Throughput" metric:  
+     The value is the averged number of processed requests per second per appliation instance.
+
+
+### Limitations
+{: #limitations}
+
+* For Java application using IBM Liberty buildpack,  {{site.data.keyword.autoscaling}} data collector uses [Liberty Monitor-1.0 feature -> ServletStats MXBean](https://www.ibm.com/support/knowledgecenter/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/rwlp_mon_webapp.html) to collect the metrics. Pay attention to the following constraints  when Response time/Throughput metric is used for scaling.
+   * Your application must be deployed as Liberty web application so that Liberty web conatiner and Liberty Monitor-1.0 feature are loaded to collect the metrics. Spring Boot application deployed as a "Main-Classs" appliation or using embedded Tomcat server does not use Liberty web container, therefore no metrics data will be collected. 
+   * The requests going to static HTML page are not captured by {{site.data.keyword.autoscaling}} data collector given no servlet is hit. For example, if you deploy the starter web-application of [Liberty for Java Runtime](https://console.bluemix.net/catalog/starters/liberty-for-java) and run load test against its root URL which is a static HTML page, the reported Response time/Throughput metric will be 0.   
+* For Swift application, only Kitura framework is supported <br/> 
 
 ## Error messages
 {: #err_msg}
