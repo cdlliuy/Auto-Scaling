@@ -276,7 +276,7 @@ You can obtain the endpoint of {{site.data.keyword.autoscaling}} API server by c
    > cf app Your-App --guid
    aa8d19b6-eceb-4b6e-b034-926a87e98a51
 ```
-{{site.data.keyword.autoscaling}} service RESTful API document explain the details API definition:  [Rest API of IBM {{site.data.keyword.autoscaling}} for {{site.data.keyword.Bluemix_notm}}](https://new-console.stage1.ng.bluemix.net/apidocs/48){:new_window}.
+{{site.data.keyword.autoscaling}} service RESTful API document explain the details API definition:  [Rest API of IBM {{site.data.keyword.autoscaling}} for {{site.data.keyword.Bluemix_notm}}](https://new-console.{DomainName}/apidocs/48){:new_window}.
 
 A sample script to invoke {{site.data.keyword.autoscaling}} service RESTful API with *curl*:
 ```
