@@ -67,9 +67,9 @@ The output of the command is formatted as "bearer <bear token>".  Please keep th
 ```
 
 
-**Q:  What will happen when changing instances number by %**  
+**Q:  What will happen when changing instances number by % ?**  
 A:  When changing instances number by % as defined in [`policy`](../policy.html#policy_fields), the target application would scale out/in more quickly with a large instance basis, i.e. when you have 100 running instances. <br/>
-{{site.data.keyword.autoscaling}} will be ensure the target instance number is an integer value with [`ceil`](https://en.wikipedia.org/wiki/Floor_and_ceiling_functions) when changing by % is defined.
+{{site.data.keyword.autoscaling}} will make sure the target instance number is an integer value with [`ceil function`](https://en.wikipedia.org/wiki/Floor_and_ceiling_functions) when changing by % is defined.
 For example
-   * Big number of the running instances, let's say 90, scale out % is set to 15%  ==> 14 instances should be scale out
-   * Small number of the running instances, let's say 4, scale out % is set to 10%  ==> 1 instance should be scale out
+   * Big number of the running instances, let's say 90, scale out  % is set to 15%  ==> 14 instances should be scaled out
+   * Small number of the running instances, let's say 4, scale out % is set to 10%  ==> 1 instance should be scaled out
