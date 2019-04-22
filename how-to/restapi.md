@@ -17,11 +17,11 @@ lastupdated: "2017-08-09"
 # Manage {{site.data.keyword.autoscaling}} service through RESTful API
 {: #RESTAPI}
 
-[{{site.data.keyword.autoscaling}} RESTful API](https://new-console.{DomainName}/apidocs/48) provides an alternative way to manage {{site.data.keyword.autoscaling}} service. It exposes HTTP RESTful API to manage scaling policy and view scaling history. 
+[{{site.data.keyword.autoscaling}} RESTful API](../../../apidocs/auto-scaling) provides an alternative way to manage {{site.data.keyword.autoscaling}} service. It exposes HTTP RESTful API to manage scaling policy and view scaling history. 
 
-{{site.data.keyword.autoscaling}}  service RESTful API document explains the details API definition: [Rest API of IBM {{site.data.keyword.autoscaling}} for {{site.data.keyword.Bluemix_notm}}](https://new-console.{DomainName}/apidocs/48).
+{{site.data.keyword.autoscaling}}  service RESTful API document explains the details API definition: [Rest API of IBM {{site.data.keyword.autoscaling}} for {{site.data.keyword.Bluemix_notm}}](../../../apidocs/auto-scaling).
 
-Before using the [{{site.data.keyword.autoscaling}} RESTful API](https://new-console.{DomainName}/apidocs/48) to manage the {{site.data.keyword.autoscaling}} service, please complete below prerequisites with this guide:
+Before using the [{{site.data.keyword.autoscaling}} RESTful API](../../../apidocs/auto-scaling) to manage the {{site.data.keyword.autoscaling}} service, please complete below prerequisites with this guide:
 * Bind the {{site.data.keyword.autoscaling}} service with your application as described in previous section.
 * Acquire the `AccessToken`
 <br/>The user must login CloudFoundry and provide a valid access token. The `AccessToken` can be obtained by command [``cf oauth-token``](https://cli.cloudfoundry.org/en-US/cf/oauth-token.html).
@@ -58,7 +58,7 @@ You can obtain the endpoint of {{site.data.keyword.autoscaling}} API server by c
    > cf app Your-App --guid
    aa8d19b6-eceb-4b6e-b034-926a87e98a51
 ```
-* Determine the proper API URL for your request: Please check [{{site.data.keyword.autoscaling}} RESTful API](https://new-console.{DomainName}/apidocs/48) for endpoint definition of {{site.data.keyword.autoscaling}} RESTful API
+* Determine the proper API URL for your request: Please check [{{site.data.keyword.autoscaling}} RESTful API](../../../apidocs/auto-scaling) for endpoint definition of {{site.data.keyword.autoscaling}} RESTful API
 
 A sample script to invoke {{site.data.keyword.autoscaling}} service RESTful API with *curl* and *jq*:
 ```
