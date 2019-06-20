@@ -1,7 +1,7 @@
 {:navgroup: .navgroup}
 {:topicgroup: .topicgroup}
 
-{: .toc subcollection="Auto-Scaling" audience="service" arm="3242342" href="docs/services/Auto-Scaling/index.html" path="services/Auto-Scaling"}
+{: .toc subcollection="Auto-Scaling" category="devops" audience="service" arm="3242342" href="docs/services/Auto-Scaling/index.html" path="services/Auto-Scaling"}
 IBM Cloud Auto-Scaling service
 
     {: .navgroup id="learn"}
