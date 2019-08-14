@@ -18,7 +18,8 @@ lastupdated: "2017-08-09"
 # FAQ
 {: #FAQ}
 
-{{site.data.keyword.autoscaling}} is deprecated. As of 1 Augest 2019, you cannot provision new {{site.data.keyword.autoscaling}} instances on public region. Existing service instances are supported until 30 September 2019. To continue the auto-scaling capability for Cloud Foundray application in {{site.data.keyword.Bluemix_notm}}, please migrate to the NEW [built-in Auto-Scaling experience on Cloud Foundry application](https://{DomainName}/docs/cloud-foundry-public?topic=cloud-foundry-public-autoscale_cloud_foundry_apps). {:deprecated}
+{{site.data.keyword.autoscaling}} is deprecated. As of 1 Augest 2019, you cannot provision new {{site.data.keyword.autoscaling}} instances on public region. Existing service instances are supported until 30 September 2019. To continue the auto-scaling capability for Cloud Foundray application in {{site.data.keyword.Bluemix_notm}}, please migrate to the NEW [built-in Auto-Scaling experience on Cloud Foundry application](https://{DomainName}/docs/cloud-foundry-public?topic=cloud-foundry-public-autoscale_cloud_foundry_apps). 
+{:deprecated}
 
 **Q:  Why I only see "Memory" metric type available on my tomcat application?**  
 A: {{site.data.keyword.autoscaling}} service uses [Liberty Monitor-1.0 feature -> ServletStats MXBean](https://www.ibm.com/support/knowledgecenter/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/rwlp_mon_webapp.html) to evaluate the web application's workload. Your application must be deployed as Liberty web application so that Liberty web container and Liberty Monitor-1.0 feature are loaded to collect the metrics.  
