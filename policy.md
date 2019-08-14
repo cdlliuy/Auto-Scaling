@@ -13,10 +13,13 @@ lastupdated: "2017-08-09"
 {:codeblock: .codeblock}
 {:shortdesc: .shortdesc}
 {:new_window: target="_blank"}
+{:deprecated: .deprecated}
 
 
 # {{site.data.keyword.autoscaling}} policy definition
 {: #policy_fields}
+
+{{site.data.keyword.autoscaling}} is deprecated. As of 1 Augest 2019, you cannot provision new {{site.data.keyword.autoscaling}} instances on public region. Existing service instances are supported until 30 September 2019. To continue the auto-scaling capability for Cloud Foundray application in {{site.data.keyword.Bluemix_notm}}, please migrate to the NEW [built-in Auto-Scaling experience on Cloud Foundry application](https://{DomainName}/docs/cloud-foundry-public?topic=cloud-foundry-public-autoscale_cloud_foundry_apps). {: deprecated}
 
 ## Define Dynamic Scaling rule through Console
 {: #dynamic_rule}
