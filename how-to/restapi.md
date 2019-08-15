@@ -18,7 +18,8 @@ lastupdated: "2017-08-09"
 # Manage {{site.data.keyword.autoscaling}} service through RESTful API
 {: #RESTAPI}
 
-{{site.data.keyword.autoscaling}} is deprecated. As of 1 Augest 2019, you cannot provision new {{site.data.keyword.autoscaling}} instances on public region. Existing service instances are supported until 30 September 2019. To continue the auto-scaling capability for Cloud Foundray application in {{site.data.keyword.Bluemix_notm}}, please migrate to the NEW [built-in Auto-Scaling experience on Cloud Foundry application](https://{DomainName}/docs/cloud-foundry-public?topic=cloud-foundry-public-autoscale_cloud_foundry_apps). 
+{{site.data.keyword.autoscaling}} is deprecated. As of 1st Augest 2019, you cannot provision new {{site.data.keyword.autoscaling}} instances in public region. Existing service instances are supported until 30th September 2019. <br/>
+To continue using the auto-scaling capability for Cloud Foundray application in {{site.data.keyword.Bluemix_notm}}, please migrate to the NEW [built-in Auto-Scaling experience available within the Cloud Foundry application context](https://{DomainName}/docs/cloud-foundry-public?topic=cloud-foundry-public-autoscale_cloud_foundry_apps). 
 {:deprecated}
 
 [{{site.data.keyword.autoscaling}} RESTful API](../../../apidocs/auto-scaling) provides an alternative way to manage {{site.data.keyword.autoscaling}} service. It exposes HTTP RESTful API to manage scaling policy and view scaling history. 
